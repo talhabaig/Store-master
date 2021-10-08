@@ -1,0 +1,22 @@
+﻿@model BaigMedicalStore.Models.DistributorViewModel
+
+@{
+    ViewBag.Title = "Save Distributor";
+}
+
+<div class="page-heading">
+    @ViewBag.Title
+    <hr />
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("_DistributorForm")
+}
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/DistributorFormManager")
+}

@@ -1,0 +1,81 @@
+﻿@model BaigMedicalStore.Models.DistributorViewModel
+@using Kendo.Mvc.UI
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal form-input-style">
+
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManufacturerIds, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @(Html.Kendo().MultiSelectFor(model => model.ManufacturerIds)
+                          .DataTextField("Text")
+                          .DataValueField("Value").AutoClose(false)
+                        .DataSource(d => d.Read(r => r.Action("GetManufacturerList", "Common")))
+                )
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Company, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @(Html.Kendo().MaskedTextBoxFor(model => model.Phone)
+
+                  .Mask("0000-0000000")
+                  .HtmlAttributes(new { @class = "form-control" })
+
+                )
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="form-group form-button-bar">
+        <div class="col-md-12">
+            <input id="btnSubmitForm" type="submit" value="Submit" class="btn btn-kips btn-purple" />
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-kips" })
+        </div>
+    </div>
+
+</div>
+
+<input type="hidden" name="DistributorId" id="hfDstributorId" value="@Model.DistributorId" />

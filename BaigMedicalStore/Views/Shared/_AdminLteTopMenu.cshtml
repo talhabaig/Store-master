@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNet.Identity
+@using BaigMedicalStore.BusinessLogic
+@{
+    ViewBag.Layout = null;
+}
+
+<header class="main-header">
+    <!-- Logo -->
+    @*<a href="~/Home/Index" class="logo"><b>Baig Medical Store</b></a>*@
+    <a href="~/Home/Index" class="logo"><b>Inventory System</b></a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <!-- Messages: style can be found in dropdown.less-->
+                <!-- Notifications: style can be found in dropdown.less -->
+                <!-- Tasks: style can be found in dropdown.less -->
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        @SiteUserBusinessLogic.GetLoggedInUserFirstName(User.Identity.GetUserId())
+
+                    </a>
+                    <ul class="dropdown-menu">
+
+                        <!-- Menu Body -->
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            @*<div class="pull-left">
+                                    @Html.ActionLink("Profile", "Profile", "Account", null, new { @class = "btn btn-default btn-flat" })
+                                </div>*@
+                            <div class="pull-right">
+                                @Html.ActionLink("Sign Out", "LogOff", "Account", null, new { @class = "btn btn-default btn-flat" })
+
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,115 @@
+﻿@using Kendo.Mvc.UI
+@model BaigMedicalStore.Models.InvoiceModel
+<link rel="stylesheet" href="~/Content/jquery-ui.css">
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
+
+@{
+    ViewBag.Title = "Invoice"; }
+
+@using (Html.BeginForm())
+{
+    <div class="page-heading">
+        @ViewBag.Title
+    </div>
+    @Html.AntiForgeryToken()
+    <div class="search-panel">
+        <div class="col-md-12 p0">
+            <div class="search-panel-input-bar">
+                <div class="col-md-3 pl0">
+                    <div class="search-panel-input">
+                        <label class="col-md-6 p0">Name</label>
+                        <input type="text" id="txtName" placeholder="Search By Name" class="form-control" data-field="Name" />
+                    </div>
+                </div>
+                <div class="col-md-3 pl0">
+                    <div class="search-panel-input">
+                        <label class="col-md-6 p0">Code</label>
+                        <input type="text" id="txtCode" placeholder="Search By Code" class="form-control" data-field="Code" />
+                    </div>
+                </div>
+
+                <div class="col-md-3 pl0">
+                   
+                </div>
+                <div class="col-md-3 pl0">
+                        <div class="search-panel-input">
+                            <label class="col-md-6 p0">Edit Invoice</label>
+                            <input type="text" id="txtInvoice" placeholder="Search By Invoice Number" class="form-control" data-field="Code" />
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="col-md-12 p0">
+            <div class=" col-md-9 search-panel-button-bar floatr" style="margin: 0px !important">
+                <input type="button" value="ADD" id="btnAdd" class="btn btn-kips btn-purple mt0" />
+                <input type="button" value="RESET" id="btnReset" class="btn btn-kips mtr0" />
+            </div>
+            <div class="col-md-3 search-panel-button-bar float-left" style="margin: 0px !important">
+                    <input type="button" value="Search" id="btnSearch" class="btn btn-kips mtr0" />
+                </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="row pt30">
+        <div class="col-md-12 form-group">
+            <table class="table" id="OrderItems">
+                <thead>
+                    <tr>
+                        <th><label>Items</label></th>
+                        <th><label>Quantity</label></th>
+                        <th><label>Unit Price</label></th>
+                        <th><label>Stock Left</label></th>
+                        <th><label>Discount Amount</label></th>
+                        <th><label>Total</label></th>
+                        <th id="btnnDelete"><label>Actions</label></th>
+                    </tr>
+                </thead>
+                <tbody class="tbodyOrderItems"></tbody>
+            </table>
+            <div class="float-right">
+                <strong style="font-weight:700; font-size:22px">Discount : <label id="lblTotalDiscount"></label></strong>
+                <br />
+                <strong style="font-weight:700; font-size:22px">Total: <label id="lblTotalAmount"></label></strong>
+                <br />
+
+                <input type="button" value="Print" id="btnPrint" class="btn btn-kips btn-purple mt0" />
+            </div>
+
+
+        </div>
+    </div>
+
+}
+<script id="orderItemTemplate" type="text/x-jQuery-tmpl">
+    <tr data-id="${ItemId}" data-name="${Name}" data-purchasePrice="${PurchasePrice}" data-code="${Code}" data-quantity="${Quantity}" data-salePrice="${SalePrice}" data-unitPrice="${UnitPrice}" data-pieceinpack="${Pieceinpack}" data-totalStock="${TotalStock}">
+        <td hidden class="itemId"> ${ItemId}</td>
+        <td>${Name}</td>
+        <td><input onkeyup="invoiceGridManager.changeQuanitiy(this)" type="number" min="1" max="${TotalStock}" data-val-range="The value must be greater than 0" data-val-range-max="${TotalStock}" data-val-range-min="1" data-val-required="Quantity is required." id="Quantity" data-original-title="Quantity must be greater than 0" title="" data-tooltip="tooltip-danger" data-toggle="tooltip" data-val="true" name="Quantity" class="quantity form-control" value="${Quantity}"></td>
+        <td>${UnitPrice}</td>
+        <td>${TotalStock}</td>
+        <td><input onkeyup="invoiceGridManager.changeQuanitiy(this)" type="number" min="1" data-val-range-max="2147483647" data-val-range-min="1" id="Discount" data-original-title="Discount must be greater than 0" title="" data-tooltip="tooltip-danger" data-toggle="tooltip" data-val="true" name="Discount" class="discount form-control" value="${Discount}"></td>
+        <td class="total">${Quantity * UnitPrice}</td>
+        <td>
+            <a class="btnDelete" onclick="invoiceGridManager.DeleteRow(this)" id="${ItemId}" style="cursor:pointer">
+                <i class="fa fa-trash-alt">Remove</i>
+            </a>
+        </td>
+    </tr>
+</script>
+@section scripts
+{
+    @Scripts.Render("~/bundles/InvoiceGridManager")
+}
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>

@@ -1,0 +1,20 @@
+﻿@model BaigMedicalStore.Models.ItemViewModel
+
+@{
+    ViewBag.Title = "Save Item";
+}
+
+<div class="page-heading">
+    @ViewBag.Title
+    <hr />
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("_ItemForm")
+}
+ 
+@section scripts
+{
+    @Scripts.Render("~/bundles/ItemFormManager")
+}

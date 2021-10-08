@@ -1,0 +1,223 @@
+﻿
+@using Kendo.Mvc.UI
+@using BaigMedicalStore.Common
+
+@model BaigMedicalStore.Models.InvoiceViewModel
+@{
+    ViewBag.Title = "PrintInvoice";
+}
+
+<div id="invoice-POS">
+    <center id="top"> 
+        <img src="~/Content/Images/invoiceLogo.jpeg" style="height:60px" />
+        <div class="info">
+            <h4>City Books & Gift Centre</h4>
+        </div><!--End Info-->
+    </center><!--End InvoiceTop-->
+
+    <div id="mid">
+        <div class="info">
+            <p>
+
+                Phone   : 0303-7882228</br>
+                Address : Tahir MPA street, near Sir syed College Chishtian</br>
+            </p>
+        </div>
+    </div>
+    <div id="mid">
+        <div class="info">
+            <strong>
+                Invoice #  : @Model.InvoiceNo</br>
+            </strong>
+        </div>
+    </div>
+    <div id="mid">
+        <div class="info">
+            <strong>
+                Date  : @Model.AddedOn</br>
+            </strong>
+        </div>
+    </div>
+    <hr />
+    <div id="bot">
+        <div id="table">
+            <table>
+                <tr class="tabletitle">
+                    <td class="tableitem" style="width: 20% !important;"><strong>Item</strong></td>
+                    <td class="tableitem" style="width: 20% !important;"><strong>Qty</strong></td>
+                    <td class="tableitem" style="width: 20% !important;"><strong>Total</strong></td>
+                </tr>
+                @foreach (var mdDetail in Model.InvDetList)
+                {
+                    <tr class="service">
+                        <td class="tableitem" style="width: 20% !important;"><p class="itemtext">@mdDetail.ItemName</p></td>
+                        <td class="tableitem" style="width: 20% !important;"><p class="itemtext">@mdDetail.Quantity</p></td>
+                        <td class="tableitem" style="width: 20% !important;"><p class="itemtext">@mdDetail.TotalPrice </p></td>
+                    </tr>
+                }
+
+            </table>
+            <hr />
+            <div class="float-right">
+                <div>
+                    <span><strong>Discount:</strong> </span><span>Rs. @Model.Discount</span>
+                </div>
+                <div>
+                    <span><strong>Total:</strong> </span><span>Rs. @Model.TotalPrice</span>
+                </div>
+            </div>
+            <br />
+        </div><!--End Table-->
+        <br />
+        <br />
+        <div id="legalcopy">
+            <p class="legal">
+                <strong>Thank you for your business!</strong>
+            </p>
+            <center><small>For Any Type Of Software Contact</small></center>
+            <center><small>03319660156</small></center>
+        </div>
+
+    </div><!--End InvoiceBot-->
+</div>
+
+<div>
+    <button onclick="PrintElem('invoice-POS');">
+        Print
+    </button>
+</div>
+<script>
+    function PrintElem(el) {
+        debugger
+        var restorepage = $('body').html();
+        var printcontent = $('#' + el).clone();
+        $('body').empty().html(printcontent);
+        window.print();
+        $('body').html(restorepage);
+    }
+</script>
+<style>
+   
+    .tableitem {
+        padding-left: 9px
+    }
+
+    #invoice-POS {
+        box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+        padding: 2mm;
+        margin: 0 auto;
+        width: 60mm;
+        background: #FFF;
+        :: selection
+
+    {
+        background: #f31544;
+        color: #FFF;
+    }
+
+    ::moz-selection {
+        background: #f31544;
+        color: #FFF;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        color: #222;
+    }
+
+    h2 {
+        font-size: .9em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+        font-weight: 300;
+        line-height: 2em;
+    }
+
+    p {
+        font-size: .7em;
+        color: #666;
+        line-height: 1.2em;
+    }
+
+    #top, #mid, #bot { /* Targets all id with 'col-' */
+        border-bottom: 1px solid #EEE;
+    }
+
+    #top {
+        min-height: 100px;
+    }
+
+    #mid {
+        min-height: 80px;
+    }
+
+    #bot {
+        min-height: 50px;
+    }
+
+    #top .logo {
+        //float: left;
+        height: 60px;
+        width: 60px;
+        background: url(http://michaeltruong.ca/images/logo1.png) no-repeat;
+        background-size: 60px 60px;
+    }
+
+    .clientlogo {
+        float: left;
+        height: 60px;
+        width: 60px;
+        background: url(http://michaeltruong.ca/images/client.jpg) no-repeat;
+        background-size: 60px 60px;
+        border-radius: 50px;
+    }
+
+    .info {
+        display: block;
+        //float:left;
+        margin-left: 0;
+    }
+
+    .title {
+        float: right;
+    }
+
+        .title p {
+            text-align: right;
+        }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    td {
+        //padding: 5px 0 5px 15px;
+        //border: 1px solid #EEE
+    }
+
+    .tabletitle {
+        //padding: 5px;
+        font-size: .5em;
+        background: #EEE;
+    }
+
+    .service {
+        border-bottom: 1px solid #EEE;
+    }
+
+    .item {
+        width: 24mm;
+    }
+
+    .itemtext {
+        font-size: .5em;
+    }
+
+    #legalcopy {
+        margin-top: 5mm;
+    }
+    }
+</style>

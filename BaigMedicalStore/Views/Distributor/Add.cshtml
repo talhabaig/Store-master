@@ -1,0 +1,34 @@
+﻿@model BaigMedicalStore.Models.DistributorViewModel
+
+@{
+    ViewBag.Title = "Save Distributor";
+}
+
+<div class="page-heading">
+    @ViewBag.Title
+    <hr />
+</div>
+
+@*@using (Ajax.BeginForm("Add", "Distributor",
+                        new AjaxOptions
+                        {
+                            HttpMethod = "post",
+                            UpdateTargetId = "cntr-form",
+                            OnComplete = "distributorFormManager.OnAjaxResponse(xhr, status, 'Distributor')",
+                            OnFailure = "distributorFormManager.OnAjaxResponse(xhr, status, 'Distributor')",
+                            OnBegin = "distributorFormManager.DisableSubmitButton(xhr, status, 'Distributor')"
+                        },
+                        new { id = "createDristributorForm" }
+                        ))*@
+
+                      
+@using (Html.BeginForm())
+{
+    @Html.Partial("_DistributorForm")
+}
+
+ 
+@section scripts
+{
+    @Scripts.Render("~/bundles/DistributorFormManager")
+}

@@ -1,0 +1,18 @@
+﻿<div id="notificationMessageContainer" class=""></div>
+<div id="overlayBusy" class="overlay-busy">
+    <div class="img-loading"></div>
+</div>
+<div id="spinner" class="spinner"></div>
+<script id="confirmationBox" type="text/x-kendo-template">
+    <div class="confirmation-box">
+        <p id="confirmationMessage" class="confirmation-message"> </p>
+        <div class="button-bar">
+            <button class="confirmation-ok-button btn btn-kips btn-purple">Yes</button>
+            <button class="confirmation-cancel-button btn btn-kips">No</button>
+        </div>
+    </div>
+</script>
+<div id="divMessage" class="hidden">
+    <input id="hdnMessage" type="hidden" value="@TempData["MESSAGE"]" />
+    @TempData.Remove("MESSAGE")
+</div>

@@ -1,0 +1,110 @@
+﻿
+@using Kendo.Mvc.UI
+@using BaigMedicalStore.Common
+
+@model IEnumerable<BaigMedicalStore.Models.ManufacturerViewModel>
+
+@{
+    ViewBag.Title = "Manufacturers";
+
+    var actionColumnTemplate = string.Empty;
+    var baseEditActionUrl = CommonFunction.GetBaseUrlForActions("Edit", "Manufacturer");
+    actionColumnTemplate += "<a href=" + baseEditActionUrl + "#: EditManufacturerUrl # >";
+    actionColumnTemplate += "<span class='icon-grid icon-edit'></span></a>";
+
+    var statusColumnTemplate = string.Empty;
+    statusColumnTemplate += "<a class='seleclink' onclick='manufacturerGridManager.onChangeManufacturerStatus(this, #=ManufactId#)'>";
+    statusColumnTemplate += "#=Status# </a> ";
+
+}
+
+<div class="page-heading">
+    @ViewBag.Title
+    <hr />
+</div>
+<div class="search-panel">
+    <div class="col-md-12 p0">
+        <div class="search-panel-input-bar">
+            <div class="col-md-3 pl0">
+                <div class="search-panel-input">
+                    <label class="col-md-6 p0">Name</label>
+                    <input type="text" id="txtName" placeholder="Search By Name" class="form-control" data-field="Name" />
+                </div>
+            </div>
+            <div class="col-md-3 pl0">
+                <div class="search-panel-input">
+                    <label class="col-md-6 p0">Alias</label>
+                    <input type="text" id="txtAlias" placeholder="Search By Alias" class="form-control" data-field="Alias" />
+                </div>
+            </div>
+            <div class="col-md-3 pl0">
+                <div class="search-panel-input">
+                    <label class="col-md-6 p0">Phone</label>
+                    <input type="text" id="txtPhone" placeholder="Search By Phone" class="form-control" data-field="Phone" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-12 p0">
+        <div class="search-panel-button-bar floatr m0">
+            <input type="button" value="SEARCH" id="btnSearch" class="btn btn-kips btn-purple mt0" />
+            <input type="button" value="RESET" id="btnReset" class="btn btn-kips mtr0" />
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+
+<div class="grid-top-button-bar">
+
+    @Html.ActionLink("Add Manufacturer", "Add", "Manufacturer", null, new { @class = "btn btn-kips btn-large" })
+
+</div>
+
+<br />
+
+<div>
+    @(Html.Kendo().Grid(Model)
+          .Name("ManufacturerGrid")
+          .Columns(columns =>
+          {
+              columns.Bound(s => s.ManufactId).Title("DistribId").Hidden();
+
+
+              columns.Bound(s => s.Name).Title("Name").HeaderHtmlAttributes(new { title = "Name" });
+
+              columns.Bound(s => s.Alias).Title("Alias").HeaderHtmlAttributes(new { title = "Alias" });
+              columns.Bound(s => s.Address).Title("Address").HeaderHtmlAttributes(new { title = "Address" }).Sortable(false);
+              columns.Bound(s => s.City).Title("City").HeaderHtmlAttributes(new { title = "City" });
+              columns.Bound(s => s.Phone).Title("Phone").HeaderHtmlAttributes(new { title = "Phone" });
+              columns.Bound(s => s.IsActive).ClientTemplate(statusColumnTemplate).Title("Status").HeaderHtmlAttributes(new { style = "text-align:center;" }).Sortable(false);
+
+              columns.Bound(s => s.ManufactId).Title("").Filterable(f => f.Enabled(false)).ClientTemplate(actionColumnTemplate).Width(100).Title("Action").Sortable(false);
+
+          })
+          //.Pageable(pageable => pageable.ButtonCount(10).PageSizes(new List<string>() { "5", "10", "20", "30", "40", "50" }))
+          .Pageable(pageable => pageable.ButtonCount(10).PageSizes(new int[] { 5, 10, 20, 30, 40, 50 }))
+          .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+          .Sortable()
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .PageSize(10)
+              .Model(model => model.Id(s => s.ManufactId))
+              .Read(read => read.Action("GetManufacturers", "Manufacturer"))
+              .Events(e =>
+              {
+                  e.Error("BMS.SiteScript.KendoEventHandler.onGridError");
+              })
+          ).Events(e => e.DataBound("BMS.SiteScript.KendoEventHandler.onGridDataBound"))
+
+    )
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/ManufacturerGridManager")
+}
+
+
+

@@ -1,0 +1,66 @@
+﻿@using Kendo.Mvc.UI
+@using BaigMedicalStore.Models
+
+@{
+    ViewBag.Title = "Locations";
+
+
+    var customGridColumn = string.Empty;
+
+    customGridColumn += @"
+                        <a href='javascript: void(0)'   onclick='BMS.SiteScript.KendoGridCommands.EditRow(this)' title='edit'><span class='icon-grid icon-edit'></span></a>
+                        <a href='javascript: void(0)'  onclick='BMS.SiteScript.KendoGridCommands.DeleteRow(this)' title='delete'><span class='icon-grid icon-delete'></span></a>";
+}
+<div class="page-heading">
+    @ViewBag.Title
+    <hr />
+</div>
+
+<div>
+
+
+    @(Html.Kendo().Grid<Location>()
+          .Name("grid")
+          .Columns(columns =>
+          {
+              columns.Bound(p => p.LocationId).Hidden();
+
+              columns.Bound(p => p.Name).Width(100);
+
+              columns.Template(t => { }).HeaderTemplate("").ClientTemplate(customGridColumn)
+           .Width(50);
+
+          })
+          .ToolBar(toolBar =>
+          {
+              toolBar.Create();
+          })
+          .Editable(editable => editable.Mode(GridEditMode.InLine))
+           .Pageable(pageable => pageable.ButtonCount(10).PageSizes(new int[] { 5, 10, 20, 30, 40, 50 }))
+          .Sortable()
+          .HtmlAttributes(new { style = "height: 700px" })
+          .Scrollable()
+          .Events(e => e.Edit("BMS.SiteScript.KendoGridCommands.onEdit"))
+          .DataSource(dataSource => dataSource
+              .Ajax()
+
+              .Model(model =>
+              {
+                  model.Id(p => p.LocationId);
+                  model.Field(p => p.LocationId).Editable(false);
+
+              })
+              .PageSize(50)
+               
+              .Read(read => read.Action("LocationRead", "Location"))
+              .Create("LocationCreate", "Location")
+              .Update(update => update.Action("LocationUpdate", "Location"))
+              .Destroy(destroy => destroy.Action("LocationDestroy", "Location"))
+              .Events(e =>
+              {
+                  e.Error("BMS.SiteScript.KendoEventHandler.onGridError");
+              })
+          )
+    )
+</div>
+

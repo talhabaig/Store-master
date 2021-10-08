@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e95575283b354c7296e4825f9df90d7b" Name="Diagram1" ZoomLevel="69">
+        <EntityTypeShape EntityType="BMSModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="10.125" />
+        <EntityTypeShape EntityType="BMSModel.AspNetRole" Width="1.5" PointX="0.75" PointY="6.375" />
+        <EntityTypeShape EntityType="BMSModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="3.625" />
+        <EntityTypeShape EntityType="BMSModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="6.375" />
+        <EntityTypeShape EntityType="BMSModel.AspNetUser" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="BMSModel.Category" Width="1.5" PointX="7.75" PointY="10.125" />
+        <EntityTypeShape EntityType="BMSModel.DistributorManufacturer" Width="1.5" PointX="10" PointY="6.5" />
+        <EntityTypeShape EntityType="BMSModel.Invoice" Width="1.5" PointX="13" PointY="1.125" />
+        <EntityTypeShape EntityType="BMSModel.InvoiceDetail" Width="1.5" PointX="15.25" PointY="6.125" />
+        <EntityTypeShape EntityType="BMSModel.Location" Width="1.5" PointX="9.75" PointY="3.125" />
+        <EntityTypeShape EntityType="BMSModel.User" Width="1.5" PointX="5.25" PointY="8.875" />
+        <AssociationConnector Association="BMSModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="BMSModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="BMSModel.FK_User_AspNetUsers" />
+        <AssociationConnector Association="BMSModel.FK_InvoiceDetail_Invoice" />
+        <AssociationConnector Association="BMSModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="BMSModel.Order" Width="1.5" PointX="10.125" PointY="0.5" />
+        <EntityTypeShape EntityType="BMSModel.OrderDetail" Width="1.5" PointX="15.625" PointY="3.25" />
+        <AssociationConnector Association="BMSModel.FK_OrderDetail_Order" />
+        <EntityTypeShape EntityType="BMSModel.Distributor" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BMSModel.Manufacturer" Width="1.5" PointX="7.75" PointY="13" />
+        <AssociationConnector Association="BMSModel.FK_DistributorManufacturers_Distributor" />
+        <AssociationConnector Association="BMSModel.FK_Order_Distributor" />
+        <AssociationConnector Association="BMSModel.FK_DistributorManufacturers_Manufacturer" />
+        <EntityTypeShape EntityType="BMSModel.Item" Width="1.5" PointX="13" PointY="5.5" />
+        <AssociationConnector Association="BMSModel.FK_InvoiceDetail_Item" />
+        <AssociationConnector Association="BMSModel.FK_OrderDetail_Item" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

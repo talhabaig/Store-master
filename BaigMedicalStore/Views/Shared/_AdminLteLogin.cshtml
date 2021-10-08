@@ -1,0 +1,41 @@
+﻿@using System.Configuration
+    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="description">
+    <meta name="author" content="Evgeniya">
+    <meta name="keyword" content="keywords">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />  
+    <link href="~/Content/AdminLTE/AdminLTE.min.css" rel="stylesheet"> 
+    <link href="~/Content/AdminLTE/AdminLTE.min.css" rel="stylesheet"> 
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body class="login-bg">
+    <div class="container-fluid ">
+        @RenderBody()
+
+        @Html.Partial("_CommonHtml")
+    </div> 
+
+    <script type="text/javascript">
+        AppHostPrefix = "@ConfigurationManager.AppSettings["AppHostPrefix"]";
+    </script>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    @Scripts.Render("~/bundles/SiteScript")
+
+
+
+</body>
+</html>

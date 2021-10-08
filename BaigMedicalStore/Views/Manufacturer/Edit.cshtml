@@ -1,0 +1,21 @@
+﻿@model BaigMedicalStore.Models.ManufacturerViewModel
+
+@{
+    ViewBag.Title = "Save Manufacturer";
+}
+
+<div class="page-heading">
+    @ViewBag.Title
+    <hr />
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("_ManufacturerForm")
+}
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/ManufacturerFormManager")
+}

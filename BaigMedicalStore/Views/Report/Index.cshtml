@@ -1,0 +1,80 @@
+﻿
+@using Kendo.Mvc.UI
+@using BaigMedicalStore.Common
+
+@model IEnumerable<BaigMedicalStore.Models.ReportViewModel>
+@{
+    ViewBag.Title = "Report";
+}
+
+<div class="page-heading">
+    @ViewBag.Title
+</div>
+<div class="search-panel">
+    <div class="row">
+        <div class="col-md-4 form-group">
+            <div class="search-panel-input-bar">
+                <div class="search-panel-input">
+                    <label>From Date</label>
+                    @(Html.Kendo().DatePicker()
+                                    .Name("FromDate") 
+                                    .HtmlAttributes(new { style = "width: 100%;" })
+                            )
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 form-group">
+            <div class="search-panel-input-bar">
+                <div class="search-panel-input">
+                    <label>To Date</label>
+                    @(Html.Kendo().DatePicker()
+                                    .Name("ToDate") 
+                                    .HtmlAttributes(new { style = "width: 100%;" })
+                            )
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 p0">
+        <div class="search-panel-button-bar floatr m0">
+            <input type="button" value="SEARCH" id="btnSearch" class="btn btn-kips btn-purple mt0" />
+            <input type="button" value="RESET" id="btnReset" class="btn btn-kips mtr0" />
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<br />
+
+<div>
+    @(Html.Kendo().Grid(Model)
+          .Name("ReportGrid")
+          .Columns(columns =>
+          {
+              columns.Bound(s => s.ItemId).Title("ItemId").Hidden();
+              columns.Bound(s => s.Name).Title("Name").HeaderHtmlAttributes(new { title = "Name" });
+              columns.Bound(s => s.Quantity).Title("Quantity").HeaderHtmlAttributes(new { title = "Quantity" });
+              columns.Bound(s => s.PurchasePrice).Title("Purchase Price").HeaderHtmlAttributes(new { title = "Purchase Price" });
+              columns.Bound(s => s.SalePrice).Title("Sale Price").HeaderHtmlAttributes(new { title = "Sale Price" });
+              columns.Bound(s => s.Profit).Title("Profit").HeaderHtmlAttributes(new { title = "Profit" });
+            })
+          .Pageable(pageable => pageable.ButtonCount(10).PageSizes(new int[] { 20, 30, 40, 50, 100, 200 }))
+          .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+          .Sortable()
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .PageSize(50)
+              .Model(model => model.Id(s => s.ItemId))
+              .Read(read => read.Action("GetItems", "Report"))
+              .Events(e =>
+              {
+                  e.Error("BMS.SiteScript.KendoEventHandler.onGridError");
+              })
+          ).Events(e => e.DataBound("BMS.SiteScript.KendoEventHandler.onGridDataBound"))
+
+    )
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/ReportGridManager")
+}

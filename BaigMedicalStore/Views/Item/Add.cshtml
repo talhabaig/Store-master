@@ -1,0 +1,32 @@
+﻿@model BaigMedicalStore.Models.ItemViewModel
+
+@{
+    ViewBag.Title = "Save Item";
+}
+
+<div class="page-heading">
+    @ViewBag.Title
+    <hr />
+</div>
+
+@*@using (Ajax.BeginForm("Add", "Item",
+    new AjaxOptions
+    {
+        HttpMethod = "post",
+        UpdateTargetId = "cntr-form",
+        OnComplete = "itemFormManager.OnAjaxResponse(xhr, status, 'Item')",
+        OnFailure = "itemFormManager.OnAjaxResponse(xhr, status, 'Item')",
+        OnBegin = "itemFormManager.DisableSubmitButton(xhr, status, 'Item')"
+    },
+    new { id = "createItemForm" }
+    ))*@
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("_ItemForm")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/ItemFormManager")
+}

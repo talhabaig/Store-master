@@ -1,0 +1,148 @@
+﻿
+@using Kendo.Mvc.UI
+@model BaigMedicalStore.Models.ItemViewModel
+
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal form-input-style">
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+     
+    @*<div class="col-md-6 pl0">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Formula, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Formula, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>*@
+
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.LocationId, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @(Html.Kendo().DropDownListFor(model => model.LocationId)
+                          .DataTextField("Text")
+                          .DataValueField("Value").OptionLabel("--Please Select--")
+                        .DataSource(d => d.Read(r => r.Action("GetLocationList", "Common")))
+                )
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.LimitNotification, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.LimitNotification, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+    @*<div class="col-md-6 pl0">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+                <div class="col-md-12">
+                    @(Html.Kendo().DropDownListFor(model => model.CategoryId)
+                              .DataTextField("Text")
+                              .DataValueField("Value").OptionLabel("--Please Select--")
+                            .DataSource(d => d.Read(r => r.Action("GetCategoryList", "Common")))
+                    )
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 pl0">
+            <div class="form-group">
+                @Html.LabelFor(model => model.DistributorId, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+                <div class="col-md-12">
+                    @(Html.Kendo().DropDownListFor(model => model.DistributorId)
+                              .DataTextField("Text")
+                              .DataValueField("Value").OptionLabel("--Please Select--")
+                            .DataSource(d => d.Read(r => r.Action("GetDistributorList", "Common")))
+                            .Events(e =>
+                            {
+                                e.Select("itemFormManager.DistributorList_onSelect");
+                                e.Change("itemFormManager.DistributorList_onChange");
+                                e.DataBound("itemFormManager.DistributorList_onDataBound");
+                            })
+                    )
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 pl0">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ManufacturerId, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+                <div class="col-md-12">
+                    @(Html.Kendo().DropDownListFor(model => model.ManufacturerId)
+                              .DataTextField("Text")
+                              .DataValueField("Value").OptionLabel("--Please Select--")
+                          //  .DataSource(d => d.Read(r => r.Action("GetManufacturerList", "Common")))
+                    )
+                </div>
+            </div>
+        </div>*@
+
+
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.PiecesInPaking, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.PiecesInPaking, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotalStock, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.TotalStock, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.PurchasePrice, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.PurchasePrice, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 pl0">
+        <div class="form-group">
+            @Html.LabelFor(model => model.SalePrice, htmlAttributes: new { @class = "control-label col-md-12 talignl" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.SalePrice, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group form-button-bar">
+        <div class="col-md-12">
+            <input id="btnSubmitForm" type="submit" value="Submit" class="btn btn-kips btn-purple" />
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-kips" })
+        </div>
+    </div>
+
+
+</div>
+<input type="hidden" name="ItemId" id="hfItemId" value="@Model.ItemId" />
